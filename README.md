@@ -1,5 +1,5 @@
 # secure-file-sharing
-Applied cryptographic primitives in creating end-to-end encrypted file sharing system with efficient sharing, appending, and revoking capabilities. Designing a true, trusted E2EE system is not the goal of this project, but I'm using it to document and perform a security analysis exercise. The Golang code written interfaces with APIs from a third-party file server: the goal is to secure the system against the third-party with direct access to files.
+Applied cryptographic primitives in creating end-to-end encrypted file sharing system with efficient sharing, appending, and revoking capabilities through use of a Merkle (Hash) Tree. Designing a true, trusted E2EE system is not the goal of this project, but I'm using it to document and perform a security analysis exercise. The Golang code written interfaces with APIs from a third-party file server: the goal is to secure the system against the third-party with direct access to files.
 
 # System Design
 ## How is a file stored on the server?
