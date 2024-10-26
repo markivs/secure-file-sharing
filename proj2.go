@@ -1,22 +1,12 @@
-package proj2
-
-// CS 161 Project 2
-
-// You MUST NOT change these default imports.  ANY additional imports it will
-// break the autograder and everyone will be sad.
-
 import (
-	"github.com/cs161-staff/userlib"
 
 	// The JSON library will be useful for serializing go structs.
-	// See: https://cs161.org/assets/projects/2/docs/coding_tips/json.html.
 	"encoding/json"
 
 	// Likewise, useful for debugging, etc.
 	"encoding/hex"
 
 	// The Datastore requires UUIDs to store key-value entries.
-	// See: https://cs161.org/assets/projects/2/docs/coding_tips/uuid.html.
 	"github.com/google/uuid"
 
 	// Useful for debug messages, or string manipulation for datastore keys.
@@ -28,8 +18,7 @@ import (
 	// Optional. You can remove the "_" there, but please do not touch
 	// anything else within the import bracket.
 	_ "strconv"
-	// if you are looking for fmt, we don't give you fmt, but you can use userlib.DebugMsg.
-	// see someUsefulThings() below:
+
 )
 
 // This serves two purposes:
@@ -172,9 +161,6 @@ type User struct {
     Keys FileKeys
     Files map[string]uuid.UUID
 
-	// You can add other fields here if you want...
-	// Note for JSON to marshal/unmarshal, the fields need to
-	// be public (start with a capital letter)
 }
 
 type File struct {
@@ -224,9 +210,6 @@ func InitUser(username string, password string) (userdataptr *User, err error) {
 
 	return &userdata, nil
 }
-
-// GetUser is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/getuser.html
 func GetUser(username string, password string) (userdataptr *User, err error) {
 	var userdata User
 	userdataptr = &userdata
@@ -251,8 +234,6 @@ func GetUser(username string, password string) (userdataptr *User, err error) {
 	return userdataptr, nil
 }
 
-// StoreFile is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/storefile.html
 func (userdata *User) StoreFile(filename string, data []byte) (err error) {
     var filedata File
     var fKeys FileKeys
@@ -290,10 +271,6 @@ func (userdata *User) StoreFile(filename string, data []byte) (err error) {
 	userdata.Files[filename] = filedata.UUID
 	return
 }
-
-
-// LoadFile is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/loadfile.html
 func (userdata *User) LoadFile(filename string) (dataBytes []byte, err error) {
     var filedata File
     var fKeys FileKeys
@@ -331,8 +308,6 @@ func (userdata *User) LoadFile(filename string) (dataBytes []byte, err error) {
 }
 
 
-// AppendFile is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/appendfile.html
 func (userdata *User) AppendFile(filename string, data []byte) (err error) {
     var filedata File
     var fKeys FileKeys
@@ -388,8 +363,6 @@ func (userdata *User) AppendFile(filename string, data []byte) (err error) {
     userlib.DatastoreSet(userdata.Files[filename], compiledData)
 	return
 }
-// ShareFile is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/sharefile.html
 func (userdata *User) ShareFile(filename string, recipient string) (
 	accessToken uuid.UUID, err error) {
     var fKeys FileKeys
@@ -425,9 +398,6 @@ func (userdata *User) ShareFile(filename string, recipient string) (
 
 	return userdata.Files[filename], err
 }
-
-// ReceiveFile is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/receivefile.html
 func (userdata *User) ReceiveFile(filename string, sender string,
 accessToken uuid.UUID) error {
     var filedata File
@@ -456,9 +426,6 @@ accessToken uuid.UUID) error {
     userdata.Files[filename] = accessToken
 	return nil
 }
-
-// RevokeFile is documented at:
-// https://cs161.org/assets/projects/2/docs/client_api/revokefile.html
 func (userdata *User) RevokeFile(filename string, targetUsername string) (err error) {
      var filedata File
      var fKeys FileKeys
