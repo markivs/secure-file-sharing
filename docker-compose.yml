@@ -6,8 +6,10 @@ services:
     container_name: secure-file-daemon
     restart: always
     volumes:
-      - ./:/app   # Mount local source for easy development
-    environment:
-      - GOOGLE_OAUTH_CREDENTIALS=/app/credentials.json
-    ports:
-      - "8080:8080" # Optional if your daemon listens on ports
+      - ./local_sync:/sync  # Host folder for decrypted files
+    secrets:
+      - gdrive-creds
+
+secrets:
+  gdrive-creds:
+    file: ./secrets/gdrive-creds.json  # Place your Google credentials here

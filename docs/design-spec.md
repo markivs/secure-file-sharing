@@ -50,6 +50,11 @@ A fully client-side, distributed, encrypted file-sharing application designed as
 - Operational Transform chosen for simplicity.
 - OAuth credentials externally injected into clients.
 
+### Local Storage (Explicitly Unencrypted)
+
+Local files explicitly remain unencrypted on the user's device for editing simplicity. This design explicitly avoids unnecessary complexity, such as custom encrypted editors or local encryption management, ensuring the project explicitly stays focused on secure distributed collaboration and encryption-in-transit/storage explicitly in third-party Google Doc shards.
+
+**Local device security explicitly remains out-of-scope.** Users explicitly concerned about local security should ensure appropriate device-level encryption and OS protections.
 ---
 
 ## Key Design Choices
